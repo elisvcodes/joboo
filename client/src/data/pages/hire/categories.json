@@ -1,0 +1,9 @@
+[
+  { "value": "software", "label": "Software Development" },
+  { "value": "customer", "label": "Customer Support" },
+  { "value": "sales", "label": "Sales" },
+  { "value": "marketing", "label": "Marketing" },
+  { "value": "design", "label": "Design" },
+  { "value": "legal", "label": "Legal" },
+  { "value": "other", "label": "Other" }
+]

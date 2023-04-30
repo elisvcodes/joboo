@@ -1,0 +1,4 @@
+[
+  { "value": "fulltime", "label": "Full Time" },
+  { "value": "contract", "label": "Contract" }
+]
