@@ -1,69 +1,12 @@
 import React, { useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Editor as TinyMCEEditor } from "tinymce";
-import { Editor } from "@tinymce/tinymce-react";
-
+import TextField from "@/components/common/TextField/TextField";
+import SelectField from "@/components/common/SelectField/SelectField";
+import MCEEditor from "@/components/MCEEditor/MCEEditor";
 import jobtype from "../data/pages/hire/type.json";
 import jobcategories from "../data/pages/hire/categories.json";
 import countries from "../data/shared/countries.json";
 
-interface TextFieldProps {
-  id: string;
-  label: string;
-  placeholder?: string;
-}
-
-const TextField = ({ id, label, placeholder }: TextFieldProps) => {
-  return (
-    <div className="flex flex-col gap-1 my-6">
-      <Label htmlFor={id} className="!mb-2">
-        {label}
-      </Label>
-      <Input id={id} placeholder={placeholder} />
-    </div>
-  );
-};
-
-interface SelectFieldProps {
-  label: string;
-  placeholder?: string;
-  options: { value: string; label: string }[];
-}
-
-const SelectField = ({ label, placeholder, options }: SelectFieldProps) => {
-  return (
-    <div className="flex flex-col gap-3 my-6">
-      <Label>{label}</Label>
-      <Select>
-        <SelectTrigger>
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          <ScrollArea className="max-h-[200px] overflow-auto">
-            {options.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </ScrollArea>
-        </SelectContent>
-      </Select>
-    </div>
-  );
-};
-
 export default function hire() {
-  const editorRef = useRef<TinyMCEEditor | null>(null);
-
   return (
     <div className="py-8">
       <div>
@@ -97,34 +40,7 @@ export default function hire() {
           options={countries}
         />
 
-        <div className="flex flex-col gap-3">
-          <Label>Job Description</Label>
-          <Editor
-            onInit={(evt, editor) => (editorRef.current = editor)}
-            tinymceScriptSrc={"./tinymce/tinymce.min.js"}
-            init={{
-              height: 350,
-              menubar: false,
-              branding: false,
-              plugins: [
-                "advlist",
-                "lists",
-                "autolink",
-                "link",
-                "image",
-                "anchor",
-                "code",
-                "powerpaste",
-                "quickbars",
-              ],
-              toolbar:
-                "undo redo blocks removeformat | bold italic link |alignleft aligncenter alignright alignjustify | bullist numlist | outdent indent ",
-              quickbars_selection_toolbar:
-                "bold italic underline | blocks | bullist numlist | blockquote quicklink",
-              quickbars_insert_toolbar: "",
-            }}
-          />
-        </div>
+        <MCEEditor />
       </div>
     </div>
   );
