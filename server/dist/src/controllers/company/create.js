@@ -38,19 +38,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var prismaClient_1 = require("../../utils/prismaClient");
 var createCompany = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, title, description, logo, website, user, company, error_1;
+    var _a, companyTitle, companyDescription, logo, website, user, company, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, title = _a.title, description = _a.description, logo = _a.logo, website = _a.website;
+                _a = req.body, companyTitle = _a.companyTitle, companyDescription = _a.companyDescription, logo = _a.logo, website = _a.website;
                 user = req.user;
+                if (!user) {
+                    return [2 /*return*/, res.status(400).json({ message: "User not defined" })];
+                }
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, prismaClient_1.prismaClient.company.create({
                         data: {
-                            title: title,
-                            description: description,
+                            companyTitle: companyTitle,
+                            companyDescription: companyDescription,
                             logo: logo,
                             website: website,
                             userId: user.id,
@@ -58,7 +61,6 @@ var createCompany = function (req, res, next) { return __awaiter(void 0, void 0,
                     })];
             case 2:
                 company = _b.sent();
-                res.status(200).json({ message: "Success" });
                 req.company = company;
                 return [2 /*return*/, next()];
             case 3:

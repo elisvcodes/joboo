@@ -1,4 +1,7 @@
 import express from "express";
-const router = express.Router();
+import createFirstJob from "./routes/job/index";
+const app = express();
 
-export default router;
+app.use("/job", createFirstJob);
+
+export default app;

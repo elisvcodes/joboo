@@ -56,9 +56,9 @@ var createUser = function (req, res, next) { return __awaiter(void 0, void 0, vo
                     })];
             case 2:
                 user = _b.sent();
-                res.status(200).json({ message: "Success" });
                 req.user = user;
-                return [2 /*return*/, next()];
+                next();
+                return [3 /*break*/, 4];
             case 3:
                 error_1 = _b.sent();
                 res.status(400).json(error_1.message);

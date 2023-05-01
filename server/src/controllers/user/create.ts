@@ -12,9 +12,8 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
         role,
       },
     });
-    res.status(200).json({ message: "Success" });
     req.user = user;
-    return next();
+    next();
   } catch (error: any) {
     res.status(400).json(error.message);
   }

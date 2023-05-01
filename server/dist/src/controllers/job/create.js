@@ -37,20 +37,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var prismaClient_1 = require("../../utils/prismaClient");
-var createUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, title, description, type, location, category, user, company, error_1;
+var createJob = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, jobTitle, jobDescription, type, location, category, user, company, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, title = _a.title, description = _a.description, type = _a.type, location = _a.location, category = _a.category;
+                _a = req.body, jobTitle = _a.jobTitle, jobDescription = _a.jobDescription, type = _a.type, location = _a.location, category = _a.category;
                 user = req.user, company = req.company;
+                if (!user) {
+                    return [2 /*return*/, res.status(400).json({ message: "User not defined" })];
+                }
+                else if (!company) {
+                    return [2 /*return*/, res.status(400).json({ message: "Company not defined" })];
+                }
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, prismaClient_1.prismaClient.job.create({
                         data: {
-                            title: title,
-                            description: description,
+                            jobTitle: jobTitle,
+                            jobDescription: jobDescription,
                             type: type,
                             location: location,
                             category: category,
@@ -61,7 +67,7 @@ var createUser = function (req, res, next) { return __awaiter(void 0, void 0, vo
             case 2:
                 _b.sent();
                 res.status(200).json({ message: "Success" });
-                return [2 /*return*/, next()];
+                return [3 /*break*/, 4];
             case 3:
                 error_1 = _b.sent();
                 res.status(400).json(error_1.message);
@@ -70,4 +76,4 @@ var createUser = function (req, res, next) { return __awaiter(void 0, void 0, vo
         }
     });
 }); };
-exports.default = createUser;
+exports.default = createJob;

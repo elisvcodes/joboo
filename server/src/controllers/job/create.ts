@@ -4,6 +4,13 @@ import { prismaClient } from "../../utils/prismaClient";
 const createJob = async (req: Request, res: Response, next: NextFunction) => {
   const { jobTitle, jobDescription, type, location, category } = req.body;
   const { user, company } = req;
+
+  if (!user) {
+    return res.status(400).json({ message: "User not defined" });
+  } else if (!company) {
+    return res.status(400).json({ message: "Company not defined" });
+  }
+
   try {
     await prismaClient.job.create({
       data: {
@@ -17,7 +24,6 @@ const createJob = async (req: Request, res: Response, next: NextFunction) => {
       },
     });
     res.status(200).json({ message: "Success" });
-    return next();
   } catch (error: any) {
     res.status(400).json(error.message);
   }

@@ -4,5 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var router = express_1.default.Router();
-exports.default = router;
+var index_1 = __importDefault(require("./routes/job/index"));
+var app = (0, express_1.default)();
+app.use("/job", index_1.default);
+exports.default = app;
