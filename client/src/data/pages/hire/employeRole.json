@@ -1,0 +1,5 @@
+[
+  { "value": "ceo", "label": "CEO" },
+  { "value": "cto", "label": "CTO" },
+  { "value": "recruiter", "label": "Recruiter" }
+]

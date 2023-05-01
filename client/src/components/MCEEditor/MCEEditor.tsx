@@ -10,7 +10,8 @@ export default function MCEEditor() {
     <div className="flex flex-col gap-3">
       <Label>Job Description</Label>
       <Editor
-        onInit={(evt, editor) => (editorRef.current = editor)}
+        id="mce"
+        onInit={(_evt, editor) => (editorRef.current = editor)}
         tinymceScriptSrc={"./tinymce/tinymce.min.js"}
         init={{
           height: 350,

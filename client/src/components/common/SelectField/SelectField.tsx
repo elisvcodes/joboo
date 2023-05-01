@@ -9,17 +9,18 @@ import {
 } from "@/components/ui/select";
 
 interface SelectFieldProps {
+  id: string;
   label: string;
   placeholder?: string;
   options: { value: string; label: string }[];
 }
 
-const SelectField = ({ label, placeholder, options }: SelectFieldProps) => {
+const SelectField = ({ id, label, placeholder, options }: SelectFieldProps) => {
   return (
-    <div className="flex flex-col gap-3 my-6">
-      <Label>{label}</Label>
+    <div className="flex flex-col gap-3">
+      <Label htmlFor={id}>{label}</Label>
       <Select>
-        <SelectTrigger>
+        <SelectTrigger id={id}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
