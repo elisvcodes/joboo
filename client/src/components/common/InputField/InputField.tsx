@@ -1,12 +1,13 @@
+import React, { HTMLInputTypeAttribute } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { HTMLInputTypeAttribute } from "react";
 
 interface TextFieldProps {
   id: string;
   label: string;
   placeholder?: string;
   type?: HTMLInputTypeAttribute;
+  className?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const InputField = ({
@@ -14,6 +15,7 @@ const InputField = ({
   label,
   placeholder,
   type = "text",
+  className,
 }: TextFieldProps) => {
   return (
     <div className="flex flex-col gap-1">

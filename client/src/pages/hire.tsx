@@ -12,6 +12,7 @@ import jobcategories from "../data/pages/hire/categories.json";
 import countries from "../data/shared/countries.json";
 import roles from "../data/pages/hire/employeRole.json";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function hire() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -108,7 +109,7 @@ export default function hire() {
         </GridWrapper>
       </div>
 
-      <div className="mt-8">
+      <div className="my-8">
         <h3 className="font-bold text-lg mb-4">Payment</h3>
         <StripeWrapper>
           <Card className="h-10 p-3 rounded-md">
@@ -116,6 +117,7 @@ export default function hire() {
           </Card>
         </StripeWrapper>
       </div>
+      <Button type="submit">Submit</Button>
     </form>
   );
 }
