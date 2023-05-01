@@ -10,16 +10,27 @@ import {
 
 interface SelectFieldProps {
   id: string;
+  name: string;
   label: string;
   placeholder?: string;
   options: { value: string; label: string }[];
+  value: string;
+  onChange: any;
 }
 
-const SelectField = ({ id, label, placeholder, options }: SelectFieldProps) => {
+const SelectField = ({
+  id,
+  name,
+  label,
+  placeholder,
+  options,
+  value,
+  onChange,
+}: SelectFieldProps) => {
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{label}</Label>
-      <Select>
+      <Select value={value} onValueChange={onChange} name={name}>
         <SelectTrigger id={id}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
