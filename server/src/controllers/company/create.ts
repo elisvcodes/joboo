@@ -6,13 +6,13 @@ const createCompany = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { title, description, logo, website } = req.body;
+  const { companyTitle, companyDescription, logo, website } = req.body;
   const user = req.user;
   try {
     const company = await prismaClient.company.create({
       data: {
-        title,
-        description,
+        companyTitle,
+        companyDescription,
         logo,
         website,
         userId: user.id,

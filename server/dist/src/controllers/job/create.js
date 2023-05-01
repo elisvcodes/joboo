@@ -38,11 +38,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var prismaClient_1 = require("../../utils/prismaClient");
 var createUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, title, description, type, location, category, error_1;
+    var _a, title, description, type, location, category, user, company, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _a = req.body, title = _a.title, description = _a.description, type = _a.type, location = _a.location, category = _a.category;
+                user = req.user, company = req.company;
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
@@ -53,6 +54,8 @@ var createUser = function (req, res, next) { return __awaiter(void 0, void 0, vo
                             type: type,
                             location: location,
                             category: category,
+                            ownerId: user.id,
+                            companyId: company.id,
                         },
                     })];
             case 2:

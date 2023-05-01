@@ -25,8 +25,8 @@ model User {
 
 model Job {
   id String @unique @default(uuid())
-  title String
-  description String
+  jobTitle String
+  jobDescription String
   category String
   type String
   location String
@@ -40,8 +40,8 @@ model Job {
 
 model Company {
   id String @unique @default(uuid())
-  title String
-  description String
+  companyTitle String
+  companyDescription String
   website String?
   logo String?
   job Job[]

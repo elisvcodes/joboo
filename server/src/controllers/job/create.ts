@@ -1,16 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import { prismaClient } from "../../utils/prismaClient";
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  const { title, description, type, location, category } = req.body;
+const createJob = async (req: Request, res: Response, next: NextFunction) => {
+  const { jobTitle, jobDescription, type, location, category } = req.body;
+  const { user, company } = req;
   try {
     await prismaClient.job.create({
       data: {
-        title,
-        description,
+        jobTitle,
+        jobDescription,
         type,
         location,
         category,
+        ownerId: user.id,
+        companyId: company.id,
       },
     });
     res.status(200).json({ message: "Success" });
@@ -20,4 +23,4 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default createUser;
+export default createJob;
