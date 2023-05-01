@@ -18,6 +18,7 @@ model User {
   password String
   role String
   jobs Job[]
+  companys Company[]
   createdAt DateTime @default(now())
   updatedNow DateTime @default(now())
 }
@@ -39,11 +40,13 @@ model Job {
 
 model Company {
   id String @unique @default(uuid())
-  name String
+  title String
   description String
   website String?
   logo String?
   job Job[]
+  userId String
+  user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedNow DateTime @default(now())
 }

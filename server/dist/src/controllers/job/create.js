@@ -38,26 +38,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var prismaClient_1 = require("../../utils/prismaClient");
 var createUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, fullName, email, password, role, user, error_1;
+    var _a, title, description, type, location, category, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, fullName = _a.fullName, email = _a.email, password = _a.password, role = _a.role;
+                _a = req.body, title = _a.title, description = _a.description, type = _a.type, location = _a.location, category = _a.category;
                 _b.label = 1;
             case 1:
                 _b.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, prismaClient_1.prismaClient.user.create({
+                return [4 /*yield*/, prismaClient_1.prismaClient.job.create({
                         data: {
-                            email: email,
-                            fullName: fullName,
-                            password: password,
-                            role: role,
+                            title: title,
+                            description: description,
+                            type: type,
+                            location: location,
+                            category: category,
                         },
                     })];
             case 2:
-                user = _b.sent();
+                _b.sent();
                 res.status(200).json({ message: "Success" });
-                req.user = user;
                 return [2 /*return*/, next()];
             case 3:
                 error_1 = _b.sent();
