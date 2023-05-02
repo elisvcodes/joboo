@@ -14,6 +14,7 @@ import jobcategories from "../data/pages/hire/categories.json";
 import countries from "../data/shared/countries.json";
 import roles from "../data/pages/hire/employeRole.json";
 import useFormState from "@/hooks/useFormState";
+import useMediaUpload from "@/hooks/useMediaUpload";
 
 const initialState = {
   jobTitle: "",
@@ -33,9 +34,16 @@ const initialState = {
 
 export default function hire() {
   const [formState, handleInputChange] = useFormState(initialState);
-  console.log(formState);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const { uploadMedia } = useMediaUpload();
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      const logoUrl = formState.logo ? await uploadMedia(formState.logo) : "";
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
