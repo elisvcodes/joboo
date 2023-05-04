@@ -40,7 +40,7 @@ model Job {
 
 model Company {
   id String @unique @default(uuid())
-  companyTitle String
+  companyTitle String @unique
   companyDescription String
   website String?
   logo String?
