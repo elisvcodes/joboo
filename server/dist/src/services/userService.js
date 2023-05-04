@@ -36,67 +36,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleCreateUser = exports.createUserMiddleware = void 0;
-function createUser(req, userService) {
-    return __awaiter(this, void 0, void 0, function () {
-        var _a, fullName, email, password, role;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _a = req.body, fullName = _a.fullName, email = _a.email, password = _a.password, role = _a.role;
-                    return [4 /*yield*/, userService.create({
-                            email: email,
-                            fullName: fullName,
-                            password: password,
-                            role: role,
-                        })];
-                case 1: return [2 /*return*/, _b.sent()];
-            }
-        });
-    });
-}
-var createUserMiddleware = function (userService) {
-    return function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-        var _a, error_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _b.trys.push([0, 2, , 3]);
-                    _a = req;
-                    return [4 /*yield*/, createUser(req, userService)];
-                case 1:
-                    _a.user = _b.sent();
-                    next();
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_1 = _b.sent();
-                    res.status(400).json({ message: error_1.message });
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    }); };
-};
-exports.createUserMiddleware = createUserMiddleware;
-var handleCreateUser = function (userService) {
-    return function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var user, error_2;
+exports.userService = void 0;
+var prismaClient_1 = require("../utils/prismaClient");
+exports.userService = {
+    create: function (userData) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, createUser(req, userService)];
-                case 1:
-                    user = _a.sent();
-                    res.status(201).json(user);
-                    return [3 /*break*/, 3];
-                case 2:
-                    error_2 = _a.sent();
-                    res.status(400).json({ message: error_2.message });
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                case 0: return [4 /*yield*/, prismaClient_1.prismaClient.user.create({ data: userData })];
+                case 1: return [2 /*return*/, _a.sent()];
             }
         });
-    }); };
+    }); },
 };
-exports.handleCreateUser = handleCreateUser;

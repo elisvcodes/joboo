@@ -1,22 +1,36 @@
 import { NextFunction, Request, Response } from "express";
 import { prismaClient } from "../../utils/prismaClient";
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+async function createUser(req: Request, userService: any) {
   const { fullName, email, password, role } = req.body;
-  try {
-    const user = await prismaClient.user.create({
-      data: {
-        email,
-        fullName,
-        password,
-        role,
-      },
-    });
-    req.user = user;
-    next();
-  } catch (error: any) {
-    res.status(400).json(error.message);
-  }
+  return await userService.create({
+    email,
+    fullName,
+    password,
+    role,
+  });
+}
+
+const createUserMiddleware = (userService: any) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      req.user = await createUser(req, userService);
+      next();
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  };
 };
 
-export default createUser;
+const handleCreateUser = (userService: any) => {
+  return async (req: Request, res: Response) => {
+    try {
+      const user = await createUser(req, userService);
+      res.status(201).json(user);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+};
+
+export { createUserMiddleware, handleCreateUser };

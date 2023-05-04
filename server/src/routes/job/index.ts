@@ -1,10 +1,16 @@
 import { Router } from "express";
 import createJob from "../../controllers/job/create";
-import createUser from "../../controllers/user/create";
+import { createUserMiddleware } from "../../controllers/user/create";
 import createCompany from "../../controllers/company/create";
+import { userService } from "../../services/userService";
 
 const router = Router();
 
-router.post("/firstjob/create/", createUser, createCompany, createJob);
+router.post(
+  "/firstjob/create/",
+  createUserMiddleware(userService),
+  createCompany,
+  createJob
+);
 
 export default router;
