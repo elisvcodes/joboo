@@ -57,21 +57,17 @@ export default function HirePage() {
       });
       const clientSecret = data.clientSecret;
 
-      const paymentResult = await stripe?.confirmCardPayment(clientSecret, {
+      const logoUrl = formState.logo ? await uploadMedia(formState.logo) : "";
+      const result = createJob({
+        ...formState,
+        logo: logoUrl,
+      });
+
+      await stripe?.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
         },
       });
-
-      if (paymentResult.error) {
-        console.log(paymentResult.error.message);
-      } else {
-        const logoUrl = formState.logo ? await uploadMedia(formState.logo) : "";
-        createJob({
-          ...formState,
-          logo: logoUrl,
-        });
-      }
     } catch (error) {
       console.log(error);
     }
