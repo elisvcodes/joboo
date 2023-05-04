@@ -1,5 +1,4 @@
 import { Router } from "express";
-import createUser from "../../controllers/user/create";
 import createPaymentIntent from "../../controllers/payment/payment-intent";
 
 const router = Router();

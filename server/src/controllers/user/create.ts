@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { prismaClient } from "../../utils/prismaClient";
 
 async function createUser(req: Request, userService: any) {
   const { fullName, email, password, role } = req.body;
