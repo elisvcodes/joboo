@@ -10,6 +10,7 @@ interface TextFieldProps {
   type?: HTMLInputTypeAttribute;
   value?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  required?: boolean;
 }
 
 const InputField = ({
@@ -20,6 +21,7 @@ const InputField = ({
   type = "text",
   value,
   onChange,
+  required = false,
 }: TextFieldProps) => {
   return (
     <div className="flex flex-col gap-1">
@@ -33,6 +35,7 @@ const InputField = ({
         type={type}
         value={value}
         onChange={onChange}
+        required={required}
       />
     </div>
   );

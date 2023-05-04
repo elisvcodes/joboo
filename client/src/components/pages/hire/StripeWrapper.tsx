@@ -12,15 +12,5 @@ export default function StripeWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const options = {
-    // passing the client secret obtained from the server
-    mode: "setup",
-    currency: "usd",
-  };
-
-  return (
-    <Elements stripe={stripePromise} options={options}>
-      {children}
-    </Elements>
-  );
+  return <Elements stripe={stripePromise}>{children}</Elements>;
 }

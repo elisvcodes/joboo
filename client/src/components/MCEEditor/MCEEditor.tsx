@@ -14,7 +14,7 @@ export default function MCEEditor({
 
   return (
     <div className="flex flex-col gap-3">
-      <Label>Job Description</Label>
+      <Label>Job Description*</Label>
       <Editor
         id="mce"
         value={value}
