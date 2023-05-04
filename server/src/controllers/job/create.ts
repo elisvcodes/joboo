@@ -2,7 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { prismaClient } from "../../utils/prismaClient";
 
 const createJob = async (req: Request, res: Response, next: NextFunction) => {
-  const { jobTitle, jobDescription, type, location, category } = req.body;
+  const { jobTitle, jobDescription, type, location, category, applyUrl } =
+    req.body;
   const { user, company } = req;
 
   if (!user) {
@@ -19,6 +20,7 @@ const createJob = async (req: Request, res: Response, next: NextFunction) => {
         type,
         location,
         category,
+        applyUrl,
         ownerId: user.id,
         companyId: company.id,
       },

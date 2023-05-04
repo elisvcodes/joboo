@@ -31,6 +31,7 @@ const initialState = {
   type: "fulltime",
   location: "remote",
   category: "other",
+  applyUrl: "",
 };
 
 export default function HirePage() {
@@ -131,8 +132,18 @@ export default function HirePage() {
 
         <DynamicSpacer height={"sm"} />
         <MCEEditor
-          value={formState.companyDescription}
-          onChange={handleInputChange("companyDescription")}
+          value={formState.jobDescription}
+          onChange={handleInputChange("jobDescription")}
+        />
+        <DynamicSpacer height={"sm"} />
+        <InputField
+          id="applyUrl"
+          name="applyUrl"
+          label="Apply link*"
+          placeholder="https://nasa.gov/job/apply"
+          value={formState.applyUrl}
+          onChange={handleInputChange("applyUrl")}
+          required
         />
       </div>
 
@@ -163,7 +174,6 @@ export default function HirePage() {
           label="Company Logo*"
           type="file"
           onChange={handleInputChange("logo")}
-          required
         />
         <DynamicSpacer height={"sm"} />
         <InputField

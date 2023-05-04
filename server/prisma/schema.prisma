@@ -28,6 +28,7 @@ model Job {
   jobTitle String
   jobDescription String
   category String
+  applyUrl String
   type String
   location String
   ownerId String

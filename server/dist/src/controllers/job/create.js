@@ -38,11 +38,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var prismaClient_1 = require("../../utils/prismaClient");
 var createJob = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, jobTitle, jobDescription, type, location, category, user, company, error_1;
+    var _a, jobTitle, jobDescription, type, location, category, applyUrl, user, company, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, jobTitle = _a.jobTitle, jobDescription = _a.jobDescription, type = _a.type, location = _a.location, category = _a.category;
+                _a = req.body, jobTitle = _a.jobTitle, jobDescription = _a.jobDescription, type = _a.type, location = _a.location, category = _a.category, applyUrl = _a.applyUrl;
                 user = req.user, company = req.company;
                 if (!user) {
                     return [2 /*return*/, res.status(400).json({ message: "User not defined" })];
@@ -60,6 +60,7 @@ var createJob = function (req, res, next) { return __awaiter(void 0, void 0, voi
                             type: type,
                             location: location,
                             category: category,
+                            applyUrl: applyUrl,
                             ownerId: user.id,
                             companyId: company.id,
                         },
