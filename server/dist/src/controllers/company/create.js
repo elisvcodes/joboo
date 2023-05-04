@@ -36,39 +36,80 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var prismaClient_1 = require("../../utils/prismaClient");
-var createCompany = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, companyTitle, companyDescription, logo, website, user, company, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _a = req.body, companyTitle = _a.companyTitle, companyDescription = _a.companyDescription, logo = _a.logo, website = _a.website;
-                user = req.user;
-                if (!user) {
-                    return [2 /*return*/, res.status(400).json({ message: "User not defined" })];
-                }
-                _b.label = 1;
-            case 1:
-                _b.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, prismaClient_1.prismaClient.company.create({
-                        data: {
+exports.handleCreateCompany = exports.createCompanyMiddleware = void 0;
+function createCompany(req, companySerice) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _a, companyTitle, companyDescription, logo, website, user;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _a = req.body, companyTitle = _a.companyTitle, companyDescription = _a.companyDescription, logo = _a.logo, website = _a.website;
+                    user = req.user;
+                    return [4 /*yield*/, companySerice.create({
                             companyTitle: companyTitle,
                             companyDescription: companyDescription,
                             logo: logo,
                             website: website,
                             userId: user.id,
-                        },
-                    })];
-            case 2:
-                company = _b.sent();
-                req.company = company;
-                return [2 /*return*/, next()];
-            case 3:
-                error_1 = _b.sent();
-                res.status(400).json(error_1.message);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
+                        })];
+                case 1: return [2 /*return*/, _b.sent()];
+            }
+        });
     });
-}); };
-exports.default = createCompany;
+}
+var createCompanyMiddleware = function (companyService) {
+    return function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+        var user, _a, error_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    user = req.user;
+                    if (!user) {
+                        return [2 /*return*/, res.status(400).json({ message: "User not defined" })];
+                    }
+                    _b.label = 1;
+                case 1:
+                    _b.trys.push([1, 3, , 4]);
+                    _a = req;
+                    return [4 /*yield*/, createCompany(req, companyService)];
+                case 2:
+                    _a.company = _b.sent();
+                    return [2 /*return*/, next()];
+                case 3:
+                    error_1 = _b.sent();
+                    res.status(400).json(error_1.message);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    }); };
+};
+exports.createCompanyMiddleware = createCompanyMiddleware;
+var handleCreateCompany = function (companyService) {
+    return function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var user, company, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    user = req.user;
+                    if (!user) {
+                        return [2 /*return*/, res.status(400).json({ message: "User not defined" })];
+                    }
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, createCompany(req, companyService)];
+                case 2:
+                    company = _a.sent();
+                    res.status(201).json(company);
+                    return [3 /*break*/, 4];
+                case 3:
+                    error_2 = _a.sent();
+                    res.status(400).json(error_2.message);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    }); };
+};
+exports.handleCreateCompany = handleCreateCompany;
